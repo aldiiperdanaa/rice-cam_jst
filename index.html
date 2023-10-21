@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon</title>
+
+    <!-- ROBOFLOW -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.15.0/dist/tf.js"></script>
+    <script src="https://cdn.roboflow.com/0.2.26/roboflow.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <!-- TEMPLATE IMAGE YANG DIDETEKSI -->
+    <img src="" id="img-view" width="1000px" height="1000px" class="img-change">
+
+    <nav>
+        <a href="#" class="navbar-logo">
+            <i class="ph-bold ph-grains"></i>
+            <h5>Hackathon</h5>
+        </a>
+        <div class="navbar-icon">
+            <i class="ph-bold ph-bell"></i>
+            <i class="ph-bold ph-list"></i>
+        </div>
+    </nav>
+    <main id="none-detect">
+        <div>
+            <img src="images/upload-image.png" alt="">
+            <p class="text-base">Silahkan upload gambar <br> untuk mendeteksi kualitas beras</p>
+            <label for="input-image" class="button-primary button-sm button-icon">
+                <i class="ph-bold ph-upload-simple"></i>
+                Gambar
+            </label>
+            <input type="file" accept="image/jpg, image/jpeg, image/png" id="input-image">
+        </div>
+    </main>
+    <main id="load-detect">
+        <div class="loading"></div>
+    </main>
+    <main id="complete-detect">
+        <header>
+            <div class="header-title">
+                <h4 id="file-name">Lorem Ipsum</h4>
+                <p class="text-sm tag" id="class-category">Kategori</p>
+            </div>
+            <button id="more-button">
+                <i class="ph-bold ph-dots-three-vertical"></i>
+            </button>
+            <div class="more-button more-hidden" id="button-more">
+                <button class="button-icon">
+                    <i class="ph-bold ph-share-fat"></i>
+                    Bagikan
+                </button>
+                <button class="button-icon" id="add-info">
+                    <i class="ph-bold ph-plus-circle"></i>
+                    Informasi
+                </button>
+                <div></div>
+                <label for="input-image" class="button-icon">
+                    <i class="ph-bold ph-arrows-counter-clockwise"></i>
+                    Gambar
+                </label>
+            </div>
+        </header>
+        <div class="main-content">
+            <section class="overview container">
+                <p class="container-title">Ikhtisar Identifikasi</p>
+                <div class="container-content">
+                    <h6><span>0</span> Objek</h6>
+                    <div class="overview-progress">
+                        <div class="overview-bar" id="over-bar"></div>
+                        <div class="overview-percent">
+                            <p class="text-xs">0%</p>
+                            <p class="text-xs">50%</p>
+                            <p class="text-xs">100%</p>
+                        </div>
+                    </div>
+                    <div class="overview-detail" id="over-data"></div>
+                </div>
+            </section>
+            <div class="header-container">
+                </section>
+                <section class="header-item container">
+                    <div class="header-title-cont">
+                        <p class="text-xs">BUTIR BERAS</p>
+                        <i class="ph-bold ph-grains"></i>
+                    </div>
+                    <div class="header-subtitle">
+                        <h4 class="header-num grains-num">0</h4>
+                        <p class="text-xs">/ <span>0</span> Objek</p>
+                    </div>
+                </section>
+                <section class="header-item container">
+                    <div class="header-title-cont">
+                        <p class="text-xs">HARGA PASAR</p>
+                        <i class="ph-bold ph-coins"></i>
+                    </div>
+                    <div class="header-subtitle">
+                        <h4 class="header-num price-num">0</h4>
+                        <p class="text-xs">/ Kg</p>
+                    </div>
+                </section>
+            </div>
+            <section class="image-over">
+                <img src="" class="img-change image-overview" alt="">
+            </section>
+            <section class="grains container">
+                <div class="grains-title">
+                    <p>Parameter Utama</p>
+                    <p class="text-xs tag-xs class-default" id="grains-count">Butir kepala</p>
+                </div>
+                <div class="grains-container">
+                    <div id="chart-grains"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- MODAL IMAGE -->
+    <div class="modal-container-image">
+        <div class="image-modal">
+            <img src="" alt="" class="img-change">
+            <div id="image-box"></div>
+        </div>
+    </div>
+
+    <!-- MODAL INFO -->
+    <div class="modal-container-info">
+        <div class="modal-info">
+            <div class="info-header">
+                <div class="info-title">
+                    <p>Informasi Tambahan</p>
+                    <p class="text-xs tag-xs class-default">Opsional</p>
+                </div>
+                <i class="ph-bold ph-x" id="close-info"></i>
+            </div>
+            <div class="info-main">
+                <section class="segment-input">
+                    <p>Segmentasi Pasar</p>
+                    <div class="segment-input-list">
+                        <label>
+                            <input type="radio" name="segment-input" value="Pasar Tradisional" checked>
+                            <div class="circle-radio"></div>
+                            <span>Pasar Tradisional</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="segment-input" value="Pasar Modern">
+                            <div class="circle-radio"></div>
+                            <span>Pasar Modern</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="segment-input" value="Pedagang Besar">
+                            <div class="circle-radio"></div>
+                            <span>Pedagang Besar</span>
+                        </label>
+                        <label>
+                            <input type="radio" name="segment-input" value="Produsen">
+                            <div class="circle-radio"></div>
+                            <span>Produsen</span>
+                        </label>
+                    </div>
+                </section>
+                <section class="province-input">
+                    <p>Lokasi</p>
+                    <div class="province-input-list">
+                        <input type="text" id="province-input" placeholder="Masukkan provinsi">
+                    </div>
+                </section>
+                <button class="button-primary" id="save-info">
+                    Simpan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHOSPHOR ICONS -->
+    <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+
+    <!-- APEX CHART -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <!-- JAVASCRIPT -->
+    <script src="scripts/main.js"></script>
+    <script src="scripts/api.js"></script>
+</body>
+
+</html>
