@@ -31,7 +31,7 @@ document.querySelector("#button-more .button-icon:nth-child(1)").addEventListene
         navigator.share({
             title: 'KeDai Hackathon',
             text: 'Berikut adalah aplikasi pendeteksi kualitas beras',
-            url: 'https://www.example.com'
+            url: 'http://bit.ly/teknokratain'
         })
             .then(() => console.log('Berhasil membagikan'))
             .catch((error) => console.error('Gagal membagikan', error));
