@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.querySelector("#button-more .button-icon:nth-child(1)").addEventListener("click", function () {
     if (navigator.share) {
         navigator.share({
-            title: 'KeDai Hackathon',
+            title: 'Rice Cam - JST',
             text: 'Berikut adalah aplikasi pendeteksi kualitas beras',
             url: 'http://bit.ly/teknokratain'
         })
