@@ -74,8 +74,8 @@ function detectObjects(imageDataUrl) {
         publishable_key: "rf_r1CAhU1Q3m2Sx3d2V0qT"
     });
     roboflow.load({
-        model: "ricecam",
-        version: 1,
+        model: "jst",
+        version: 11,
     }).then(model => {
         model.configure({
             threshold: 0.5,
